@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>About - AgroWorld</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&family=Merriweather&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --green-dark: #002e10;
+      --green-mid: #2e7d32;
+      --green-light: #eafaf1;
+      --font-main: 'Inter', sans-serif;
+      --font-head: 'Merriweather', serif;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: var(--font-main);
+      background: url('https://th.bing.com/th/id/OIP.8yAHXS1O1GboTsrwZ5e4CwHaHa?rs=1&pid=ImgDetMain') no-repeat center center fixed;
+      background-size: cover;
+      color: #1b1b1b;
+    }
+
+    .content-wrapper {
+      background-color: rgba(255, 255, 255, 0.15);
+      backdrop-filter: blur(4px);
+      min-height: 100vh;
+    }
+
+    .main-header {
+      background: var(--green-dark);
+      color: white;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      padding: 16px 40px;
+    }
+
+    .logo {
+      font-size: 26px;
+      font-weight: bold;
+    }
+
+    .nav-links {
+      list-style: none;
+      display: flex;
+      gap: 20px;
+    }
+
+    .nav-links a {
+      text-decoration: none;
+      color: white;
+      font-weight: 500;
+      padding: 6px 12px;
+      border-radius: 6px;
+      transition: 0.3s ease;
+    }
+
+    .nav-links a:hover,
+    .nav-links .active {
+      background: #ffffff;
+      color: var(--green-dark);
+    }
+
+    .info-section {
+      padding: 60px 5%;
+      animation: fadeIn 1.2s ease;
+    }
+
+    .info-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 60px;
+      gap: 40px;
+      flex-wrap: wrap;
+    }
+
+    .info-row.reverse {
+      flex-direction: row-reverse;
+    }
+
+    .info-text, .info-image {
+      flex: 1;
+      min-width: 280px;
+    }
+
+    .info-text h1,
+    .info-text h3 {
+      color: var(--green-mid);
+      font-size: 26px;
+      margin-bottom: 18px;
+      font-family: var(--font-head);
+    }
+
+    .info-text p,
+    .info-text ul {
+      font-size: 16.5px;
+      line-height: 1.8;
+    }
+
+    .info-text ul {
+      list-style: none;
+      padding-left: 0;
+    }
+
+    .info-text ul li {
+      position: relative;
+      padding-left: 25px;
+      margin-bottom: 12px;
+    }
+
+    .info-text ul li::before {
+      content: '✅';
+      position: absolute;
+      left: 0;
+    }
+
+    .section-img {
+      width: 100%;
+      height: auto;
+      border-radius: 12px;
+      border: 3px solid #cde7d6;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    }
+
+    .boxed {
+      background: #ffffff;
+      border-radius: 10px;
+      padding: 24px;
+      box-shadow: 0 8px 16px rgba(0, 0, 0, 0.07);
+    }
+
+    footer {
+      background: var(--green-dark);
+      color: white;
+      padding: 20px;
+      text-align: center;
+    }
+
+    #chat-float {
+      position: fixed;
+      right: 20px;
+      bottom: 20px;
+      background: var(--green-dark);
+      color: white;
+      border: none;
+      border-radius: 50%;
+      font-size: 22px;
+      padding: 14px 18px;
+      cursor: pointer;
+      z-index: 1000;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    }
+
+    #chat-popup {
+      display: none;
+      position: fixed;
+      bottom: 80px;
+      right: 20px;
+      width: 300px;
+      height: 400px;
+      background: white;
+      border: 2px solid var(--green-dark);
+      border-radius: 12px;
+      z-index: 999;
+      overflow: hidden;
+      box-shadow: 0 0 15px rgba(0, 0, 0, 0.15);
+    }
+
+    #chat-popup iframe {
+      width: 100%;
+      height: 100%;
+      border: none;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(40px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    @media (max-width: 768px) {
+      .nav-links {
+        flex-direction: column;
+        gap: 10px;
+      }
+
+      .info-row, .info-row.reverse {
+        flex-direction: column;
+      }
+
+      .info-text h1, .info-text h3 {
+        font-size: 22px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="content-wrapper">
+    <header class="main-header">
+      <div class="logo">AgroWorld 🌾</div>
+      <nav>
+        <ul class="nav-links">
+          <li><a href="index.html">Home</a></li>
+          <li><a href="news.html">Newsroom</a></li>
+          <li><a href="Services.html">Services</a></li>
+          <li><a href="about.html" class="active">About Us</a></li>
+          <li><a href="contact.html">Contact</a></li>
+          <li id="google_translate_element" style="margin-left: 10px;"></li>
+        </ul>
+      </nav>
+    </header>
+
+    <section class="info-section">
+      <div class="info-row">
+        <div class="info-text boxed">
+          <h1>🌿 About AgroWorld</h1>
+          <p>AgroWorld is a cutting-edge green technology platform dedicated to transforming the agricultural landscape. We harness the power of digital innovation to simplify farming, boost productivity, and foster sustainability—empowering farmers through every season.</p>
+        </div>
+        <div class="info-image">
+          <img src="https://th.bing.com/th/id/OIP.0urjvNKvsiLnMryaAEH_iwHaEK" class="section-img" alt="About AgroWorld">
+        </div>
+      </div>
+
+      <div class="info-row reverse">
+        <div class="info-text boxed">
+          <h3>🌟 Our Mission</h3>
+          <p>To democratize access to agricultural intelligence and technology so that every farmer—regardless of location, language, or literacy—can grow sustainably, profitably, and confidently.</p>
+        </div>
+        <div class="info-image">
+          <img src="https://th.bing.com/th/id/OIP.5CGNKWlPIHHCTRvYpOoUKgHaE8" class="section-img" alt="Mission">
+        </div>
+      </div>
+
+      <div class="info-row">
+        <div class="info-text boxed">
+          <h3>👥 Who We Are</h3>
+          <p>We are a multidisciplinary team of agronomists, AI engineers, language experts, and rural innovators driven by a shared passion for farming. With experience in agri-policy, mobile development, and rural outreach, we blend fieldwork with technology to deliver real impact.</p>
+        </div>
+        <div class="info-image">
+          <img src="https://tse2.mm.bing.net/th?id=OIP.T5BibOwc2yHvZywHoxXnKgHaE8" class="section-img" alt="Team">
+        </div>
+      </div>
+
+      <div class="info-row reverse">
+        <div class="info-text boxed">
+          <h3>🤝 How We Help Farmers</h3>
+          <ul>
+            <li>AI-powered crop & pest management advice</li>
+            <li>Hyper-local weather alerts and drought warnings</li>
+            <li>Real-time translation of agri-schemes</li>
+            <li>24/7 multilingual chatbot even in rural zones</li>
+            <li>Access via mobile-first tools for low-literacy users</li>
+          </ul>
+        </div>
+        <div class="info-image">
+          <img src="https://www.futurefarming.com/app/uploads/2023/03/IMG_AIinagriculture-848x565.jpg" class="section-img" alt="Support">
+        </div>
+      </div>
+
+      <div class="info-row">
+        <div class="info-text boxed">
+          <h3>👨‍🌾 Our Team</h3>
+          <p>Our people are farmers at heart and problem-solvers by profession. We collaborate with village leaders, agricultural extension workers, and cooperatives to co-create solutions that truly serve rural India.</p>
+        </div>
+        <div class="info-image">
+          <img src="https://th.bing.com/th/id/OIP.HgFXa00sfHslARz9fSkH0QHaEU" class="section-img" alt="Team Spirit">
+        </div>
+      </div>
+    </section>
+
+    <footer>
+      <p>&copy; 2025 AgroWorld. All rights reserved.</p>
+    </footer>
+  </div>
+
+  <button id="chat-float" onclick="toggleChat()">💬</button>
+  <div id="chat-popup">
+    <iframe src="chatbot.html" title="AgriBot Chatbot"></iframe>
+  </div>
+
+  <script>
+    function toggleChat() {
+      const popup = document.getElementById("chat-popup");
+      popup.style.display = popup.style.display === "block" ? "none" : "block";
+    }
+  </script>
+  <!-- 🌐 GOOGLE TRANSLATE WIDGET -->
+  <div id="google_translate_element" style="position: fixed; top: 10px; right: 10px; z-index: 9999;"></div>
+
+  <script type="text/javascript">
+    function googleTranslateElementInit() {
+      new google.translate.TranslateElement({
+        pageLanguage: 'en',
+        includedLanguages: 'en,hi,gu,es',
+        layout: google.translate.TranslateElement.InlineLayout.SIMPLE,
+        autoDisplay: false
+      }, 'google_translate_element');
+    }
+  </script>
+
+  <script type="text/javascript" src="https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit">
+  </script>
+
+</body>
+</html>

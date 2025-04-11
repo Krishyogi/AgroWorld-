@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>AgriBot Assistant</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&family=Poppins:wght@500&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --green-dark: #014d1d;
+      --green-light: #d0f1dd;
+      --white: #ffffff;
+      --gray: #f4f4f4;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background: linear-gradient(to bottom right, #d9f3dc, #e7fbe9);
+      height: 100vh;
+      color: #002e10;
+    }
+
+    .chat-container {
+      max-width: 400px;
+      height: 100%;
+      margin: auto;
+      display: flex;
+      flex-direction: column;
+      border-radius: 16px;
+      overflow: hidden;
+      box-shadow: 0 0 20px rgba(0,0,0,0.15);
+      background: var(--white);
+      animation: fadeIn 0.5s ease;
+    }
+
+    .chat-header {
+      background: var(--green-dark);
+      color: white;
+      padding: 16px;
+      font-size: 18px;
+      font-weight: 600;
+      text-align: center;
+      font-family: 'Poppins', sans-serif;
+      letter-spacing: 0.5px;
+    }
+
+    .chat-box {
+      flex: 1;
+      padding: 16px;
+      overflow-y: auto;
+      background: var(--gray);
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .chat-msg {
+      padding: 10px 16px;
+      border-radius: 16px;
+      max-width: 75%;
+      word-wrap: break-word;
+      font-size: 14px;
+      animation: bounceIn 0.3s ease;
+    }
+
+    .user {
+      background: #c8e6c9;
+      align-self: flex-end;
+      text-align: right;
+    }
+
+    .bot {
+      background: #b2dfdb;
+      align-self: flex-start;
+      text-align: left;
+    }
+
+    .chat-input {
+      background: rgba(255, 255, 255, 0.9);
+      padding: 14px;
+      border-top: 1px solid #ddd;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .input-row {
+      display: flex;
+      gap: 8px;
+    }
+
+    .input-row input {
+      flex: 1;
+      padding: 10px 12px;
+      font-size: 14px;
+      border: 1px solid #ccc;
+      border-radius: 10px;
+      outline: none;
+    }
+
+    .input-row button {
+      background: var(--green-dark);
+      color: white;
+      padding: 10px 16px;
+      border: none;
+      border-radius: 10px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: 0.3s ease;
+    }
+
+    .input-row button:hover {
+      background: #02652d;
+    }
+
+    .lang-mic-row {
+      display: flex;
+      gap: 10px;
+    }
+
+    .lang-mic-row select,
+    .lang-mic-row button {
+      flex: 1;
+      padding: 8px;
+      font-size: 13px;
+      border-radius: 8px;
+      border: 1px solid #ccc;
+      background: #f1f1f1;
+      cursor: pointer;
+    }
+
+    .lang-mic-row button {
+      background: var(--green-dark);
+      color: white;
+      border: none;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(10px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    @keyframes bounceIn {
+      from { transform: scale(0.95); opacity: 0.5; }
+      to   { transform: scale(1); opacity: 1; }
+    }
+
+    @media (max-width: 500px) {
+      .chat-container {
+        width: 100%;
+        border-radius: 0;
+        max-height: none;
+        height: 100vh;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="chat-container">
+    <div class="chat-header">🌾 AgroWorld Assistant</div>
+
+    <div id="chatBox" class="chat-box"></div>
+
+    <div class="chat-input">
+      <div class="input-row">
+        <input type="text" id="userInput" placeholder="Ask me anything..." />
+        <button onclick="sendMessage()">Send</button>
+      </div>
+      <div class="lang-mic-row">
+        <button onclick="startListening()">🎤 Speak</button>
+        <select id="langSelect">
+          <option value="english">English</option>
+          <option value="hindi">Hindi</option>
+          <option value="gujarati">Gujarati</option>
+          <option value="spanish">Spanish</option>
+        </select>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const chatBox = document.getElementById("chatBox");
+    const input = document.getElementById("userInput");
+    const langSelect = document.getElementById("langSelect");
+
+    function appendMessage(text, type) {
+      const msg = document.createElement("div");
+      msg.classList.add("chat-msg", type);
+      msg.textContent = text;
+      chatBox.appendChild(msg);
+      chatBox.scrollTop = chatBox.scrollHeight;
+    }
+
+    async function sendMessage() {
+      const text = input.value.trim();
+      if (!text) return;
+
+      appendMessage(text, "user");
+      input.value = "";
+
+      const formData = new FormData();
+      formData.append("message", text);
+      formData.append("language", langSelect.value);
+
+      try {
+        const res = await fetch("http://localhost/AgroWebsite/backend/chatbot.php", {
+          method: "POST",
+          body: formData
+        });
+
+        const data = await res.json();
+        if (data.response) {
+          appendMessage(data.response, "bot");
+          speak(data.response);
+        } else {
+          appendMessage("⚠️ No response from server", "bot");
+        }
+      } catch (err) {
+        appendMessage("❌ Error reaching the server.", "bot");
+        console.error("Chatbot error:", err);
+      }
+    }
+
+    function speak(text) {
+      const synth = window.speechSynthesis;
+      const utter = new SpeechSynthesisUtterance(text);
+      const langMap = {
+        english: "en-IN",
+        hindi: "hi-IN",
+        gujarati: "gu-IN",
+        spanish: "es-ES"
+      };
+      utter.lang = langMap[langSelect.value] || "en-IN";
+      synth.speak(utter);
+    }
+
+    function startListening() {
+      if (!('webkitSpeechRecognition' in window)) {
+        alert("Speech recognition not supported in your browser.");
+        return;
+      }
+
+      const recognition = new webkitSpeechRecognition();
+      recognition.lang = {
+        english: "en-IN",
+        hindi: "hi-IN",
+        gujarati: "gu-IN",
+        spanish: "es-ES"
+      }[langSelect.value] || "en-IN";
+
+      recognition.start();
+
+      recognition.onresult = function (event) {
+        const result = event.results[0][0].transcript;
+        input.value = result;
+        sendMessage();
+      };
+
+      recognition.onerror = function () {
+        appendMessage("❌ Speech not recognized. Try again.", "bot");
+      };
+    }
+  </script>
+  
+</body>
+</html>

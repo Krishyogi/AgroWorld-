@@ -1,0 +1,365 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>AgroWorld – Smart Services</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --dark-green: #002e10;
+      --light-green: #f0fdf4;
+      --highlight: #eafbe3;
+      --text-dark: #1a3d23;
+      --white: #ffffff;
+    }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background: var(--light-green);
+      margin: 0;
+      padding: 0;
+      color: var(--text-dark);
+    }
+
+    header {
+      background: var(--dark-green);
+      color: var(--white);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      padding: 16px 40px;
+    }
+
+    .logo {
+      font-size: 24px;
+      font-weight: bold;
+    }
+
+    nav ul {
+      list-style: none;
+      display: flex;
+      gap: 20px;
+      margin: 0;
+      padding: 0;
+      align-items: center;
+    }
+
+    nav ul li a {
+      color: var(--white);
+      text-decoration: none;
+      padding: 6px 12px;
+      border-radius: 6px;
+      font-weight: 500;
+      transition: background 0.3s ease;
+    }
+
+    nav ul li a:hover,
+    nav ul li a.active {
+      background: var(--white);
+      color: var(--dark-green);
+    }
+
+    #google_translate_element select {
+      padding: 4px 8px;
+      border-radius: 6px;
+      border: none;
+      font-size: 14px;
+      background: var(--white);
+      color: var(--dark-green);
+      cursor: pointer;
+    }
+
+    .container {
+      max-width: 800px;
+      margin: 40px auto;
+      background: var(--white);
+      padding: 30px;
+      border-radius: 16px;
+      box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+      animation: fadeIn 1s ease-in-out;
+    }
+
+    h2 {
+      font-size: 28px;
+      margin-bottom: 20px;
+    }
+
+    label {
+      display: block;
+      margin-top: 20px;
+      font-weight: 600;
+    }
+
+    select {
+      width: 100%;
+      padding: 10px;
+      font-size: 16px;
+      margin-top: 8px;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+    }
+
+    .result-box {
+      margin-top: 30px;
+      padding: 20px;
+      border-radius: 12px;
+      background: var(--highlight);
+      display: none;
+      font-size: 16px;
+    }
+
+    button {
+      margin-top: 20px;
+      padding: 10px 20px;
+      background: var(--dark-green);
+      color: white;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+    }
+
+    footer {
+      background: var(--dark-green);
+      color: white;
+      padding: 16px;
+      text-align: center;
+      margin-top: 50px;
+    }
+
+    #chat-float {
+      position: fixed;
+      right: 24px;
+      bottom: 24px;
+      background-color: var(--dark-green);
+      color: white;
+      border: none;
+      border-radius: 50%;
+      width: 56px;
+      height: 56px;
+      font-size: 24px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+      z-index: 1000;
+    }
+
+    #chat-popup {
+      display: none;
+      position: fixed;
+      bottom: 90px;
+      right: 20px;
+      width: 300px;
+      height: 400px;
+      background: white;
+      border: 2px solid var(--dark-green);
+      border-radius: 12px;
+      overflow: hidden;
+      z-index: 999;
+      box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15);
+    }
+
+    #chat-popup iframe {
+      width: 100%;
+      height: 100%;
+      border: none;
+    }
+
+    @keyframes fadeIn {
+      from {opacity: 0; transform: translateY(20px);}
+      to {opacity: 1; transform: translateY(0);}
+    }
+
+    @media (max-width: 600px) {
+      nav ul {
+        flex-direction: column;
+        gap: 10px;
+        margin-top: 10px;
+      }
+
+      .container {
+        margin: 20px;
+        padding: 20px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <div class="logo">AgroWorld 🌾</div>
+  <nav>
+    <ul>
+      <li><a href="index.html">Home</a></li>
+      <li><a href="news.html">Newsroom</a></li>
+      <li><a href="services.html" class="active">Services</a></li>
+      <li><a href="about.html">About Us</a></li>
+      <li><a href="contact.html">Contact</a></li>
+      <li id="google_translate_element"></li>
+    </ul>
+  </nav>
+</header>
+
+<div class="container">
+  <h2>Select Your City & Service</h2>
+
+  <label for="city">Select City:</label>
+  <select id="city">
+    <option value="">-- Choose City --</option>
+    <option>Ahmedabad</option>
+    <option>Bengaluru</option>
+    <option>Bhopal</option>
+    <option>Delhi</option>
+    <option>Hyderabad</option>
+    <option>Jaipur</option>
+    <option>Kolkata</option>
+    <option>Mumbai</option>
+    <option>Patna</option>
+    <option>Ranchi</option>
+    <option>Surat</option>
+  </select>
+
+  <label for="category">Select Advisory Category:</label>
+  <select id="category">
+    <option value="">-- Choose Advisory --</option>
+    <option value="crop">🌿 AI-powered Crop & Pest Management</option>
+    <option value="weather">🌧️ Weather Alerts & Drought Warnings</option>
+    <option value="rain">💧 Rainfall Prediction</option>
+    <option value="fertilizer">🌾 Fertilizer Recommendations</option>
+  </select>
+
+  <button onclick="resetForm()">🔄 Reset</button>
+
+  <div class="result-box" id="resultBox"></div>
+</div>
+
+<footer>&copy; 2025 AgroWorld. All rights reserved.</footer>
+
+<!-- CHATBOT -->
+<button id="chat-float" onclick="toggleChat()">💬</button>
+<div id="chat-popup">
+  <iframe src="chatbot.html" title="AgriBot Chatbot"></iframe>
+</div>
+
+<script>
+  const data = {
+    Mumbai: {
+      crop: "Use neem-based pesticides for coastal humidity resistance. Monitor whitefly in tomato fields.",
+      weather: "Expect scattered rains next 3 days. Delay irrigation accordingly.",
+      rain: "78% chance of light rainfall this weekend in Thane-Navi region.",
+      fertilizer: "Apply potassium nitrate for fruiting crops this week."
+    },
+    Delhi: {
+      crop: "Check for aphid infestation in leafy vegetables. Ideal for cauliflower planting now.",
+      weather: "Dust storms likely by end of week. Secure polyhouses.",
+      rain: "Low chance of rain. Continue regular drip irrigation.",
+      fertilizer: "Add compost and DAP before wheat sowing in outer districts."
+    },
+    Bengaluru: {
+      crop: "Scout for leaf spot in banana. Mildew risk high in grapes.",
+      weather: "Cooler nights ahead. Reduce irrigation for leafy greens.",
+      rain: "Rainfall expected in Mysore outskirts; plan sowing accordingly.",
+      fertilizer: "Apply urea in small dosages for chili pepper after flowering."
+    },
+    Hyderabad: {
+      crop: "Redgram and cotton affected by bollworms. Use pheromone traps.",
+      weather: "Dry spells ahead, schedule irrigation early morning.",
+      rain: "No rainfall expected. Focus on moisture conservation.",
+      fertilizer: "Use SSP and potash for sugarcane this cycle."
+    },
+    Ahmedabad: {
+      crop: "Cumin and castor pests reported. Use biological controls.",
+      weather: "Windy nights, protect nursery beds.",
+      rain: "Scanty rainfall in surrounding talukas. Mulch your soil.",
+      fertilizer: "Zinc sulfate advised for chickpeas."
+    },
+    Jaipur: {
+      crop: "Monitor locust activity. Fenugreek in ideal phase for thinning.",
+      weather: "Cool nights. Cover vegetable nurseries post dusk.",
+      rain: "No showers predicted. Focus on water-efficient crops.",
+      fertilizer: "Vermicompost blend ideal before mustard sowing."
+    },
+    Surat: {
+      crop: "Banana leaf curl spreading. Use preventive spray weekly.",
+      weather: "Mild fog mornings. Avoid spraying until dew dries.",
+      rain: "High humidity but no rain. Ideal for greenhouse prep.",
+      fertilizer: "Urea + FYM for early sugarcane boost."
+    },
+    Patna: {
+      crop: "Paddy nearing harvest. Avoid waterlogging. Prepare for rabi pulses.",
+      weather: "Chilly mornings. Monitor fungal blights.",
+      rain: "Fog likely. Store harvested grain in dry storage.",
+      fertilizer: "Apply DAP and lime for acidic soils."
+    },
+    Bhopal: {
+      crop: "Soybean disease control phase. Early wheat ideal now.",
+      weather: "Mild winds. Use windbreaks in sapling zones.",
+      rain: "No rainfall expected. Continue deep tillage.",
+      fertilizer: "Gypsum for pH balance in reclaimed plots."
+    },
+    Ranchi: {
+      crop: "Maize worm infestation on rise. Check weekly.",
+      weather: "Clear skies. Solar drying of produce recommended.",
+      rain: "Next week dry. Water harvesting advised.",
+      fertilizer: "Apply NPK in ratio 2:1:1 for pulse crops."
+    },
+    Kolkata: {
+      crop: "Monitor blast in paddy fields. Recommended: tricyclazole spray.",
+      weather: "Humidity above 80%. Risk of fungal diseases in crops.",
+      rain: "Rainfall possible mid-week. Delay fertilizer application.",
+      fertilizer: "Use potassium sulfate for jute and green gram."
+    }
+  };
+
+  const citySel = document.getElementById("city");
+  const catSel = document.getElementById("category");
+  const output = document.getElementById("resultBox");
+
+  function updateResult() {
+    const city = citySel.value;
+    const cat = catSel.value;
+
+    if (data[city] && data[city][cat]) {
+      output.style.display = "block";
+      output.innerHTML = `
+        <strong>📍 Advisory for <u>${city}</u>:</strong><br><br>
+        <span style="font-size: 17px;">${data[city][cat]}</span>
+      `;
+    } else {
+      output.style.display = "none";
+    }
+  }
+
+  function resetForm() {
+    citySel.selectedIndex = 0;
+    catSel.selectedIndex = 0;
+    output.style.display = "none";
+  }
+
+  function toggleChat() {
+    const popup = document.getElementById("chat-popup");
+    popup.style.display = popup.style.display === "block" ? "none" : "block";
+  }
+
+  citySel.addEventListener("change", updateResult);
+  catSel.addEventListener("change", updateResult);
+</script>
+
+<!-- 🌐 GOOGLE TRANSLATE -->
+<script type="text/javascript">
+  function googleTranslateElementInit() {
+    new google.translate.TranslateElement({
+      pageLanguage: 'en',
+      includedLanguages: 'en,hi,gu,es',
+      layout: google.translate.TranslateElement.InlineLayout.SIMPLE,
+      autoDisplay: false
+    }, 'google_translate_element');
+  }
+</script>
+<script src="https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+
+</body>
+</html>

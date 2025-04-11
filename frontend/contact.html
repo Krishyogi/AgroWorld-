@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Contact - AgroWorld</title>
+
+  <!-- Modern Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&family=Playfair+Display:wght@600&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --green-dark: #002e10;
+      --green-mid: #2e7d32;
+      --font-main: 'Poppins', sans-serif;
+      --font-head: 'Playfair Display', serif;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: var(--font-main);
+      background: url('https://images.unsplash.com/photo-1509042239860-f550ce710b93') no-repeat center center fixed;
+      background-size: cover;
+      color: #1b1b1b;
+    }
+
+    .content-wrapper {
+      background-color: rgba(255, 255, 255, 0.15);
+      backdrop-filter: blur(5px);
+      min-height: 100vh;
+    }
+
+    header.main-header {
+      background: var(--green-dark);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1rem 2rem;
+      color: white;
+    }
+
+    .logo {
+      font-size: 26px;
+      font-weight: bold;
+      font-family: var(--font-head);
+    }
+
+    .nav-links {
+      list-style: none;
+      display: flex;
+      gap: 20px;
+    }
+
+    .nav-links a {
+      color: white;
+      text-decoration: none;
+      padding: 6px 12px;
+      border-radius: 6px;
+      transition: 0.3s ease;
+    }
+
+    .nav-links a:hover,
+    .nav-links .active {
+      background: white;
+      color: var(--green-dark);
+    }
+
+    .contact-box {
+      display: flex;
+      flex-wrap: wrap;
+      max-width: 1100px;
+      margin: 60px auto;
+      background: #ffffffdd;
+      border-radius: 12px;
+      overflow: hidden;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+      animation: fadeIn 1.1s ease;
+    }
+
+    .contact-box .image-box {
+      flex: 1.2;
+      background: url('https://th.bing.com/th/id/OIP.1wTXcGqBLgLsUaW6FfXwCgHaE7?w=290&h=193&c=7&r=0&o=5&dpr=1.3&pid=1.7') no-repeat center center;
+      background-size: cover;
+      min-height: 400px;
+    }
+
+    .contact-box .form-box {
+      flex: 1;
+      padding: 40px;
+    }
+
+    .form-box h2 {
+      font-size: 32px;
+      font-family: var(--font-head);
+      margin-bottom: 10px;
+      color: var(--green-dark);
+    }
+
+    .form-box p {
+      margin-bottom: 30px;
+      color: #444;
+    }
+
+    form input,
+    form textarea {
+      width: 100%;
+      padding: 12px;
+      margin-bottom: 20px;
+      border: none;
+      border-bottom: 2px solid var(--green-dark);
+      font-size: 16px;
+      background: transparent;
+      outline: none;
+    }
+
+    form textarea {
+      resize: vertical;
+    }
+
+    button#btn-submit {
+      background: var(--green-dark);
+      color: #fff;
+      padding: 10px 28px;
+      border: none;
+      border-radius: 25px;
+      cursor: pointer;
+      font-weight: 600;
+      transition: 0.3s ease;
+    }
+
+    button#btn-submit:hover {
+      background: #014d18;
+    }
+
+    #thankyou {
+      display: none;
+      margin-top: 20px;
+      color: green;
+      font-weight: bold;
+    }
+
+    footer {
+      background: var(--green-dark);
+      color: white;
+      text-align: center;
+      padding: 20px;
+    }
+
+    #chatbot-float {
+      position: fixed;
+      bottom: 24px;
+      right: 24px;
+      background: var(--green-dark);
+      color: white;
+      padding: 12px 15px;
+      border-radius: 50%;
+      font-size: 22px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+      cursor: pointer;
+      z-index: 999;
+    }
+
+    .chat-popup {
+      position: fixed;
+      bottom: 90px;
+      right: 24px;
+      background: white;
+      border-radius: 10px;
+      width: 320px;
+      height: 400px;
+      box-shadow: 0 0 12px rgba(0,0,0,0.2);
+      border: 2px solid var(--green-mid);
+      display: none;
+      overflow: hidden;
+      z-index: 998;
+    }
+
+    .chat-popup iframe {
+      width: 100%;
+      height: 100%;
+      border: none;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(30px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    @media (max-width: 768px) {
+      .contact-box {
+        flex-direction: column;
+      }
+      .image-box {
+        height: 300px;
+      }
+      .form-box {
+        padding: 30px 20px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="content-wrapper">
+    <header class="main-header">
+      <div class="logo">AgroWorld 🌾</div>
+      <nav>
+        <ul class="nav-links">
+          <li><a href="index.html">Home</a></li>
+          <li><a href="news.html">Newsroom</a></li>
+          <li><a href="Services.html">Services</a></li>
+          <li><a href="about.html">About Us</a></li>
+          <li><a href="contact.html" class="active">Contact</a></li>
+          <li id="google_translate_element" style="margin-left: 10px;"></li>
+        </ul>
+      </nav>
+    </header>
+
+    <div class="contact-box">
+      <div class="image-box"></div>
+      <div class="form-box">
+        <h2>📬 Contact Us</h2>
+        <p>We’d love to hear from you! Fill the form below 👇</p>
+        <form action="https://formspree.io/f/mzzeaaok" method="POST" onsubmit="showThankYou(event)">
+          <input type="text" name="name" placeholder="👤 Your Name" required>
+          <input type="email" name="email" placeholder="📧 Your Email" required>
+          <textarea name="message" placeholder="✍️ Your Message" rows="5" required></textarea>
+          <button type="submit" id="btn-submit">Send Message</button>
+        </form>
+        <div id="thankyou">✅ We’ve received your message. Thank you!</div>
+      </div>
+    </div>
+
+    <footer>
+      <p>&copy; 2025 AgroWorld. All rights reserved.</p>
+    </footer>
+  </div>
+
+  <!-- Chatbot button -->
+  <div id="chatbot-float" onclick="toggleChatPopup()">💬</div>
+
+  <!-- Chatbot popup -->
+  <div class="chat-popup" id="chatbot-popup">
+    <iframe src="chatbot.html" title="AgriBot Chatbot"></iframe>
+  </div>
+
+  <!-- Scripts -->
+  <script>
+    function showThankYou(event) {
+      event.preventDefault();
+      const form = event.target;
+      const thankYouBox = document.getElementById("thankyou");
+
+      fetch(form.action, {
+        method: "POST",
+        body: new FormData(form),
+        headers: { Accept: "application/json" }
+      }).then(response => {
+        if (response.ok) {
+          form.reset();
+          thankYouBox.style.display = "block";
+        } else {
+          alert("❌ Error sending your message.");
+        }
+      }).catch(() => {
+        alert("❌ Network error.");
+      });
+    }
+
+    function toggleChatPopup() {
+      const popup = document.getElementById("chatbot-popup");
+      popup.style.display = popup.style.display === "block" ? "none" : "block";
+    }
+  </script>
+  <!-- 🌐 GOOGLE TRANSLATE WIDGET -->
+  <div id="google_translate_element" style="position: fixed; top: 10px; right: 10px; z-index: 9999;"></div>
+
+  <script type="text/javascript">
+    function googleTranslateElementInit() {
+      new google.translate.TranslateElement({
+        pageLanguage: 'en',
+        includedLanguages: 'en,hi,gu,es',
+        layout: google.translate.TranslateElement.InlineLayout.SIMPLE,
+        autoDisplay: false
+      }, 'google_translate_element');
+    }
+  </script>
+
+  <script type="text/javascript" src="https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit">
+  </script>
+
+</body>
+</html>

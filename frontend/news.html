@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>AgroWorld - Newsroom</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&family=Playfair+Display:wght@600&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --green-dark: #002e10;
+      --green-mid: #2e7d32;
+      --bg-light: #fefcf8;
+      --font-main: 'Inter', sans-serif;
+      --font-head: 'Playfair Display', serif;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: var(--font-main);
+      background: url('https://th.bing.com/th/id/OIP.2OzYiN-DKwqs7dIaeFkt2AHaH6?w=168&h=180&c=7&r=0&o=5&dpr=1.3&pid=1.7') no-repeat center center fixed;
+      background-size: cover;
+      color: #1b3b18;
+    }
+
+    .content-wrapper {
+      background-color: rgba(255, 255, 255, 0.15);
+      backdrop-filter: blur(6px);
+      min-height: 100vh;
+    }
+
+    header {
+      background: var(--green-dark);
+      padding: 15px 40px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      color: #fff;
+    }
+
+    .logo {
+      font-size: 24px;
+      font-weight: 600;
+      font-family: var(--font-head);
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 20px;
+      list-style: none;
+      align-items: center;
+      flex-wrap: wrap;
+    }
+
+    .nav-links a {
+      text-decoration: none;
+      color: white;
+      font-weight: 500;
+      transition: 0.3s;
+    }
+
+    .nav-links a:hover,
+    .nav-links .active {
+      background: white;
+      color: var(--green-dark);
+      padding: 6px 12px;
+      border-radius: 6px;
+    }
+
+    #google_translate_element select {
+      padding: 4px 6px;
+      font-size: 13px;
+      border-radius: 6px;
+      border: none;
+      background: #ffffff;
+      color: var(--green-dark);
+      cursor: pointer;
+    }
+
+    section {
+      max-width: 1100px;
+      margin: 60px auto;
+      padding: 0 20px;
+      animation: fadeIn 1s ease-in-out;
+    }
+
+    section h1,
+    section h2 {
+      font-family: var(--font-head);
+      font-size: 2.2rem;
+      margin-bottom: 1.5rem;
+      color: #082b10;
+    }
+
+    .card {
+      background: #ffffffdd;
+      border-left: 6px solid var(--green-mid);
+      padding: 20px;
+      margin-bottom: 20px;
+      border-radius: 10px;
+      box-shadow: 0 6px 18px rgba(0,0,0,0.06);
+      transition: transform 0.3s ease;
+    }
+
+    .card:hover {
+      transform: scale(1.01);
+    }
+
+    .card h3 {
+      font-size: 1.3rem;
+      color: var(--green-dark);
+      margin-bottom: 10px;
+      font-weight: 600;
+    }
+
+    .card p {
+      color: #333;
+      line-height: 1.6;
+    }
+
+    footer {
+      background: var(--green-dark);
+      color: #fff;
+      text-align: center;
+      padding: 20px;
+      margin-top: 60px;
+    }
+
+    #chat-float {
+      position: fixed;
+      right: 24px;
+      bottom: 24px;
+      background-color: var(--green-dark);
+      color: white;
+      border: none;
+      border-radius: 50%;
+      width: 56px;
+      height: 56px;
+      font-size: 24px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+      z-index: 1000;
+    }
+
+    #chat-popup {
+      display: none;
+      position: fixed;
+      bottom: 90px;
+      right: 20px;
+      width: 300px;
+      height: 400px;
+      background: white;
+      border: 2px solid var(--green-dark);
+      border-radius: 12px;
+      box-shadow: 0 0 15px rgba(0, 0, 0, 0.15);
+      z-index: 999;
+    }
+
+    #chat-popup iframe {
+      width: 100%;
+      height: 100%;
+      border: none;
+    }
+
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @media (max-width: 768px) {
+      .nav-links {
+        flex-direction: column;
+        gap: 10px;
+        align-items: flex-start;
+      }
+
+      section h1, section h2 {
+        font-size: 1.8rem;
+        text-align: center;
+      }
+
+      .card {
+        padding: 16px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="content-wrapper">
+    <header>
+      <div class="logo">AgroWorld 🌾</div>
+      <nav>
+        <ul class="nav-links">
+          <li><a href="index.html">Home</a></li>
+          <li><a href="news.html" class="active">Newsroom</a></li>
+          <li><a href="Services.html">Services</a></li>
+          <li><a href="about.html">About Us</a></li>
+          <li><a href="contact.html">Contact</a></li>
+          <li id="google_translate_element"></li>
+        </ul>
+      </nav>
+    </header>
+
+    <section>
+      <h1>📰 Latest Agriculture News</h1>
+      <div class="card">
+        <h3>📈 India Boosts Organic Farming</h3>
+        <p>The Indian government has increased its funding toward organic cultivation methods across multiple states.</p>
+      </div>
+      <div class="card">
+        <h3>☁️ Drone Monitoring in Gujarat</h3>
+        <p>Smart drones are being used to track rainfall patterns and monitor crop health in real-time.</p>
+      </div>
+      <div class="card">
+        <h3>💧 Solar Irrigation Schemes</h3>
+        <p>AI-integrated solar irrigation systems are offering 90% subsidies to smallholder farmers.</p>
+      </div>
+      <div class="card">
+        <h3>🌽 Minimum Support Price Increased</h3>
+        <p>The government has raised MSP for wheat and pulses by 8% for the upcoming Kharif season.</p>
+      </div>
+      <div class="card">
+        <h3>🚜 AgriTech Startup Incubation</h3>
+        <p>Over 100 agri-startups are now part of the Agri-Innovate India program for rural innovation and scale-up.</p>
+      </div>
+    </section>
+
+    <section>
+      <h2>🏛️ Government Schemes & Subsidies</h2>
+      <div class="card">
+        <h3>PM-KISAN</h3>
+        <p>₹6,000 annual direct support to farmers in 3 equal installments through bank transfer.</p>
+      </div>
+      <div class="card">
+        <h3>Soil Health Card</h3>
+        <p>Free soil testing and customized crop recommendations for improving yield and soil health.</p>
+      </div>
+      <div class="card">
+        <h3>Fasal Bima Yojana</h3>
+        <p>Insurance scheme offering financial aid in case of crop failure due to natural calamities.</p>
+      </div>
+      <div class="card">
+        <h3>Solar Pump Yojana</h3>
+        <p>Up to 90% subsidy on installing solar-powered irrigation pumps to reduce fuel costs.</p>
+      </div>
+      <div class="card">
+        <h3>Agri Infra Fund</h3>
+        <p>Credit support for building warehouses, cold storage, and transport infrastructure in rural areas.</p>
+      </div>
+    </section>
+
+    <footer>
+      <p>&copy; 2025 AgroWorld. All rights reserved.</p>
+    </footer>
+  </div>
+
+  <!-- Chatbot Button + Popup -->
+  <button id="chat-float" onclick="toggleChat()">💬</button>
+  <div id="chat-popup">
+    <iframe src="chatbot.html" title="AgriBot Chatbot"></iframe>
+  </div>
+
+  <script>
+    function toggleChat() {
+      const popup = document.getElementById("chat-popup");
+      popup.style.display = popup.style.display === "block" ? "none" : "block";
+    }
+  </script>
+
+  <!-- 🌐 Google Translate -->
+  <script type="text/javascript">
+    function googleTranslateElementInit() {
+      new google.translate.TranslateElement({
+        pageLanguage: 'en',
+        includedLanguages: 'en,hi,gu,es',
+        layout: google.translate.TranslateElement.InlineLayout.SIMPLE,
+        autoDisplay: false
+      }, 'google_translate_element');
+    }
+  </script>
+  <script type="text/javascript"
+    src="https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit">
+  </script>
+</body>
+</html>

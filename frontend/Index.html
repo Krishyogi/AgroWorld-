@@ -1,0 +1,353 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>AgroWorld</title>
+  <link rel="stylesheet" href="css/style.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@400;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --green-dark: #002E10;
+      --green-mid: #1b5e20;
+      --white: #ffffff;
+    }
+
+    body {
+      font-family: 'Quicksand', sans-serif;
+      margin: 0;
+      padding: 0;
+      background: #f7fff7;
+      color: #333;
+    }
+
+    .main-header {
+      background: var(--green-dark);
+      color: white;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1rem 2rem;
+      position: relative;
+      z-index: 10;
+    }
+
+    .main-header .logo {
+      font-size: 24px;
+      font-weight: 700;
+    }
+
+    .nav-links {
+      list-style: none;
+      display: flex;
+      gap: 20px;
+      margin: 0;
+      padding: 0;
+      align-items: center;
+    }
+
+    .nav-links a {
+      text-decoration: none;
+      color: #ffffff;
+      font-weight: 500;
+      transition: 0.3s;
+      padding: 6px 12px;
+      border-radius: 6px;
+    }
+
+    .nav-links a:hover,
+    .nav-links a.active {
+      background: #ffffff;
+      color: var(--green-dark);
+    }
+
+    #google_translate_element select {
+      padding: 4px 6px;
+      font-size: 13px;
+      border-radius: 6px;
+      border: none;
+      background: #fff;
+      color: var(--green-dark);
+      cursor: pointer;
+    }
+
+    .hero {
+      position: relative;
+      width: 100%;
+      height: 85vh;
+      background: url('https://th.bing.com/th/id/R.5bbdaeaae0432bd373f1eabb63f15fcb?rik=maS%2byJ1xs9F7YQ&pid=ImgRaw&r=0') no-repeat center center/cover;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .hero-overlay {
+      background-color: rgba(0, 0, 0, 0.55);
+      width: 90%;
+      display: flex;
+      justify-content: space-between;
+      padding: 3rem;
+      border-radius: 12px;
+      color: white;
+      gap: 20px;
+      flex-wrap: wrap;
+      animation: fadeInUp 1s ease-out;
+    }
+
+    .hero-overlay h1 {
+      font-size: 3.5rem;
+      margin: 0;
+      line-height: 1.2;
+    }
+
+    .hero-overlay p {
+      font-size: 1.1rem;
+    }
+
+    .hero-overlay a {
+      display: inline-block;
+      background: white;
+      color: black;
+      padding: 0.6rem 1.4rem;
+      border-radius: 30px;
+      font-weight: bold;
+      text-decoration: none;
+      margin-top: 1rem;
+      transition: all 0.3s ease;
+    }
+
+    .hero-overlay a:hover {
+      background: #ddd;
+    }
+
+    .hero-left {
+      flex: 1;
+    }
+
+    .hero-right {
+      flex: 1;
+      text-align: right;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+
+    #explore-section {
+      display: none;
+      background: url('https://th.bing.com/th/id/OIP.Ovq2Cit_MfwciRqroknFFQHaEo?w=316&h=197&c=8&rs=1&qlt=90&o=6&dpr=1.3&pid=3.1&rm=2') no-repeat center center/cover;
+      padding: 80px 5%;
+      min-height: 100vh;
+      animation: fadeIn 1s ease-in;
+    }
+
+    .explore-content {
+      max-width: 900px;
+      margin: auto;
+      background: rgba(0, 0, 0, 0.7);
+      padding: 60px;
+      border-radius: 16px;
+      color: white;
+    }
+
+    .explore-content h2 {
+      font-size: 36px;
+      margin-bottom: 20px;
+    }
+
+    .explore-content h3 {
+      font-size: 24px;
+      margin-top: 40px;
+    }
+
+    .explore-content p, .explore-content ul {
+      font-size: 18px;
+      line-height: 1.7;
+    }
+
+    footer {
+      background: var(--green-dark);
+      color: white;
+      padding: 20px;
+      text-align: center;
+    }
+
+    #chat-float {
+      position: fixed;
+      right: 24px;
+      bottom: 24px;
+      background-color: var(--green-dark);
+      color: white;
+      border: none;
+      border-radius: 50%;
+      width: 56px;
+      height: 56px;
+      font-size: 24px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+      z-index: 1000;
+    }
+
+    #chat-popup {
+      display: none;
+      position: fixed;
+      bottom: 90px;
+      right: 20px;
+      width: 300px;
+      height: 400px;
+      background: white;
+      border: 2px solid var(--green-dark);
+      border-radius: 12px;
+      overflow: hidden;
+      z-index: 999;
+      box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15);
+    }
+
+    #chat-popup iframe {
+      width: 100%;
+      height: 100%;
+      border: none;
+    }
+
+    @keyframes fadeInUp {
+      from {
+        transform: translateY(30px);
+        opacity: 0;
+      }
+      to {
+        transform: translateY(0);
+        opacity: 1;
+      }
+    }
+
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+      }
+      to {
+        opacity: 1;
+      }
+    }
+
+    @media (max-width: 768px) {
+      .hero-overlay {
+        flex-direction: column;
+        text-align: center;
+      }
+
+      .hero-right {
+        text-align: center;
+      }
+
+      .hero-overlay h1 {
+        font-size: 2.2rem;
+      }
+
+      .nav-links {
+        flex-direction: column;
+        gap: 0.5rem;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- HEADER -->
+  <header class="main-header">
+    <div class="logo">AgroWorld🌾</div>
+    <nav>
+      <ul class="nav-links">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="news.html">Newsroom</a></li>
+        <li><a href="services.html">Services</a></li>
+        <li><a href="about.html">About Us</a></li>
+        <li><a href="contact.html">Contact</a></li>
+        <li id="google_translate_element"></li> <!-- 🌐 Translate dropdown in navbar -->
+      </ul>
+    </nav>
+  </header>
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="hero-overlay">
+      <div class="hero-left">
+        <h1>Innovating <br>Agriculture</h1>
+      </div>
+      <div class="hero-right">
+        <p>Where AI meets the future of farming.</p>
+        <a href="javascript:void(0)" onclick="toggleExplore()">Explore More</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- EXPLORE SECTION -->
+  <section id="explore-section">
+    <div class="explore-content">
+      <h2>🌾 Why AgroWorld?</h2>
+      <p>
+        Traditional farming faces many modern challenges — unpredictable weather, disease outbreaks, market fluctuations.
+        At <strong>AgroWorld</strong>, we empower farmers with AI tools that deliver timely, personalized, multilingual guidance
+        for sustainable agriculture. Whether it's predicting rainfall, choosing the right fertilizer, or understanding
+        government schemes — AgroWorld helps farmers make better decisions, faster.
+      </p>
+
+      <h3>🤖 Meet AgriBot</h3>
+      <p>
+        Your AI companion that responds in your language. Get insights on fertilizer usage, irrigation timing, and
+        subsidy updates — instantly. It's more than tech — it’s trust in every tap.
+      </p>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <p>&copy; 2025 AgroWorld. All rights reserved.</p>
+  </footer>
+
+  <!-- CHATBOT -->
+  <button id="chat-float" onclick="toggleChat()">💬</button>
+  <div id="chat-popup">
+    <iframe src="chatbot.html" title="AgriBot Chatbot"></iframe>
+  </div>
+
+  <!-- SCRIPTS -->
+  <script>
+    function toggleExplore() {
+      const section = document.getElementById("explore-section");
+      section.style.display = section.style.display === "none" ? "block" : "none";
+      section.scrollIntoView({ behavior: "smooth" });
+    }
+
+    function toggleChat() {
+      const popup = document.getElementById("chat-popup");
+      popup.style.display = popup.style.display === "block" ? "none" : "block";
+    }
+
+    const links = document.querySelectorAll('.nav-links a');
+    links.forEach(link => {
+      if (window.location.href.includes(link.getAttribute('href'))) {
+        link.classList.add('active');
+      }
+    });
+  </script>
+
+  <!-- 🌐 GOOGLE TRANSLATE WIDGET -->
+  <script type="text/javascript">
+    function googleTranslateElementInit() {
+      new google.translate.TranslateElement({
+        pageLanguage: 'en',
+        includedLanguages: 'en,hi,gu,es',
+        layout: google.translate.TranslateElement.InlineLayout.SIMPLE,
+        autoDisplay: false
+      }, 'google_translate_element');
+    }
+  </script>
+
+  <script type="text/javascript"
+    src="https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit">
+  </script>
+
+</body>
+</html>
